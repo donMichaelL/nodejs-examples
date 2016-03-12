@@ -9,7 +9,7 @@ var server = http.createServer(function(req, res){
 	console.log('Request for '+ req.url + 'by method '+ req.method);
 	
 	if(req.method  == 'GET'){
-		console.log('This was a get request');
+		console.log('A GET request is comming....');
 		var fileUrl;
 		if(req.url == '/') fileUrl = '/index.html';
 		else fileUrl = req.url;
@@ -18,7 +18,7 @@ var server = http.createServer(function(req, res){
 		var fileExt = path.extname(filePath);
 		
 		if (fileExt == '.html'){
-			console.log('The extention was html');
+			console.log('The request asked for an . html file');
 			fs.exists(filePath, function(exists){
 				if(!exists){
 					res.writeHead(404, {'Content-Type':'text\html'});
