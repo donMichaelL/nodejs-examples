@@ -1,19 +1,10 @@
 var express = require('express');
-var http = require('http');
-var morgan = require('morgan');
 var bodyParser = require('body-parser');
-
-var hostname = 'localhost';
-var port = 3000;
-
-var app = express();
-
-app.use(morgan('dev'));
-app.use(express.static(__dirname + '/public'));
 
 
 var dishRouter = express.Router();
 dishRouter.use(bodyParser.json());
+
 // DISHES
 
 dishRouter.route('/')
@@ -46,8 +37,4 @@ dishRouter.route('/:dishId')
 });
 
 
-app.use('/dishes',dishRouter);
-
-app.listen(port, hostname, function(){
-	console.log('Listening in ' + hostname + ':' + port);
-});
+exports.dishRouter = dishRouter;
