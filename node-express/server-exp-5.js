@@ -13,8 +13,8 @@ app.use(morgan('dev'));
 app.use(express.static(__dirname + '/public'));
 
 // Routing
-app.use('/dishes', dishRouter.dishRouter);
-app.use('/promotions', promoRouter.promoRouter);
+app.use('/dishes', dishRouter);
+app.use('/promotions', promoRouter);
 
 app.listen(port, hostname, function(){
 	console.log('Listening in ' + hostname + ':' + port);
