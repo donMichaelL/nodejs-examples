@@ -2,3 +2,4 @@ node-examples/node_modules
 node-express/node_modules
 node-express-gen/node_modules
 node-mongodb/node_modules
+mongodb/
