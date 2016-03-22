@@ -4,10 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
-var url = 'mongodb://localhost:27017/conFusion';
-mongoose.db = mongoose.connection;
-db.on('error', console.log('Error'));
+var url =  'mongodb://localhost:27017/conFusion';
+mongoose.connect(url);
+var db = mongoose.connection;
+db.on('error',  console.error.bind(console, 'connection error:'));
 db.once('open', function(){
   console.log('Connected with Database');
 });
