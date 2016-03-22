@@ -55,5 +55,38 @@ dishRouter.route('/:dishId')
 	})
 });
 
+// COMMENTS
+dishRouter.route('/:dishId/comments')
+.get(function(req, res, next){
+	Dishes.findById(req.params.dishId, function(err, dish){
+		if(err) throw err;
+		res.json(dish.comments);
+	});
+})
+.post(function(req, res, next){
+	Dishes.findById(req.params.dishId, function(err, dish){
+		if(err) throw err;
+		dish.comments.push(req.body);
+		dish.save(function(err, dish){
+			if(err) throw err;
+			res.json(dish);
+		});
+	});
+})
+.delete(function(req, res, next){
+	Dishes.findById(req.params.dishId, function(err, dish){
+		if(err) throw err;
+		console.log(dish);
+		for (var i = (dish.comments.length - 1); i >= 0; i--) {
+			dish.comments.id(dish.comments[i]._id).remove();
+		}
+		dish.save(function(err, dish){
+			if(err) throw err;
+			res.writeHead(200, {'Content-Type': 'text/plain'});
+			res.end('Deleted all comments!');
+		});
+	});
+});
+
 
 module.exports = dishRouter;
