@@ -36,15 +36,23 @@ dishRouter.route('/')
 
 // SPECIFIC DISH
 dishRouter.route('/:dishId')
-.all(function(req, res, next){
-	res.writeHead(200, {'Content-Type': 'text-plain'});
-	next();
-})
 .get(function(req, res, next){
-	res.end('You want info for the dish '+ req.params.dishId);
+	Dishes.findById(req.params.dishId, function(err, dish){
+		if(err) throw err;
+		res.json(dish);
+	});
 })
 .put(function(req, res, next){
-	res.end('you want to update '+ req.params.dishId + ' with ' + req.body.name + ' '+ req.body.name);
+	Dishes.findByIdAndUpdate(req.params.dishId, {$set: req.body}, {new: true}, function(err, dish){
+		if(err) throw err;
+		res.json(dish);
+	});
+})
+.delete(function(req, res, next){
+	Dishes.remove(req.params.dishId, function(err, resp){
+		if(err) throw err;
+		res.json(resp);
+	})
 });
 
 
