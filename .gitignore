@@ -9,3 +9,5 @@ rest-api/node_modules
 basic-auth/node_modules
 rest-api-passport/node_modules
 rest-api-passport-populate/node_modules
+mongo-uni/node_modules
+
